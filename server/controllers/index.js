@@ -4,7 +4,7 @@ module.exports = {
   messages: {
     // a function which handles a get request for all messages
     get: function (req, res) { 
-      models.messages.get((data) => {
+      models.messages.get((err, data) => {
         console.log('Ctrl message get data: ', data);
         res.json(data);
       });
@@ -37,7 +37,7 @@ module.exports = {
       console.log('Ctrl users post data: ', data);
       models.users.post(data, (err)=> {
         if (err) {
-          throw err;
+          res.send('username already exists');
         }
         res.send('Ctrl user post: works!');
       });
